@@ -1,6 +1,8 @@
 package com.tcs.natd.springhandson.parkinggarage.controller;
 
+import com.tcs.natd.springhandson.parkinggarage.entity.ParkingSpace;
 import com.tcs.natd.springhandson.parkinggarage.entity.User;
+import com.tcs.natd.springhandson.parkinggarage.entity.Vehicle;
 import com.tcs.natd.springhandson.parkinggarage.service.UserService;
 import org.springframework.web.bind.annotation.*;
 
@@ -26,6 +28,15 @@ public class UserController {
         return this.userService.getUserById(id);
     }
 
+    @GetMapping("users/{id}/vehicles")
+    public List<Vehicle> getVehiclesByUserId(@PathVariable Long id) {
+        return this.userService.getVehiclesByUserId(id);
+    }
+
+    @GetMapping("/users/{id}/parkingspaces")
+    public ParkingSpace getParkingSpacesByUserId(@PathVariable Long id) {
+        return this.userService.getParkingSpaceByUserId(id);
+    }
 
     @GetMapping("/users/email/{email}")
     public User getUserByEmail(@PathVariable String email) {

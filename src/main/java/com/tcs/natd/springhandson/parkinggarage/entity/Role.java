@@ -4,24 +4,16 @@ import jakarta.persistence.*;
 import lombok.*;
 
 @Entity
-@Table(name = "parking_spaces")
+@Table(name = "roles")
 @Getter
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
 @ToString
-public class ParkingSpace {
+public class Role {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     Long id;
 
-    @Column(name="garage_id")
-    Long garageId;
-
-    int floor;
-
-    int number;
-
-    @Column(name="vehicle_id")
-    Long vehicleId;
+    String name;
 }

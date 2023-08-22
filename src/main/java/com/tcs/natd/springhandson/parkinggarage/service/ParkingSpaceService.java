@@ -1,6 +1,9 @@
 package com.tcs.natd.springhandson.parkinggarage.service;
 
+import com.tcs.natd.springhandson.parkinggarage.entity.Garage;
 import com.tcs.natd.springhandson.parkinggarage.entity.ParkingSpace;
+import com.tcs.natd.springhandson.parkinggarage.exception.ParkingGarageException;
+import com.tcs.natd.springhandson.parkinggarage.repository.GarageRepository;
 import com.tcs.natd.springhandson.parkinggarage.repository.ParkingSpaceRepository;
 import org.springframework.stereotype.Service;
 
@@ -9,9 +12,11 @@ import java.util.List;
 @Service
 public class ParkingSpaceService {
      private final ParkingSpaceRepository parkingSpaceRepository;
+     private final GarageRepository garageRepository;
 
-    public ParkingSpaceService(ParkingSpaceRepository parkingSpaceRepository) {
+    public ParkingSpaceService(ParkingSpaceRepository parkingSpaceRepository, GarageRepository garageRepository) {
         this.parkingSpaceRepository = parkingSpaceRepository;
+        this.garageRepository = garageRepository;
     }
 
     public List<ParkingSpace> getAllParkingSpaces() {
@@ -22,7 +27,25 @@ public class ParkingSpaceService {
         return this.parkingSpaceRepository.findById(id).orElseGet(ParkingSpace::new);
     }
 
-    public ParkingSpace addParkingSpace(ParkingSpace parkingSpace) {
+    public ParkingSpace getParkingSpaceByVehicleId(Long vehicleId) {
+        return this.parkingSpaceRepository.findByVehicleId(vehicleId);
+    }
+
+    public List<ParkingSpace> findAllParkingSpacesByGarageId(Long id) {
+        return this.parkingSpaceRepository.findAllByGarageId(id);
+    }
+
+    public ParkingSpace addParkingSpace(ParkingSpace parkingSpace) throws ParkingGarageException {
+        // Check to make sure the parking space is valid.
+        /*
+            1. Check the floor to make sure its valid as compared to how many floors
+            the garage has.
+         */
+        Garage myGarage = this.garageRepository.findById(parkingSpace.getGarageId())
+                .orElseGet(Garage::new);
+        if(parkingSpace.getFloor() > myGarage.getFloors())
+            throw new ParkingGarageException("Invalid floor for Garage "+myGarage.getStreet()+
+                    ". Max floor is "+myGarage.getFloors());
         return this.parkingSpaceRepository.save(parkingSpace);
     }
 

@@ -23,6 +23,7 @@ public class GarageService {
     }
 
     public Garage addGarage(Garage garage) {
+
         return this.garageRepository.save(garage);
     }
 

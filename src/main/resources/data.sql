@@ -39,9 +39,22 @@ INSERT into makes (name)  VALUES ('nissan');
 INSERT into makes (name)  VALUES ('buick');
 INSERT into makes (name)  VALUES ('jaguar');
 
+-- Roles
+INSERT INTO roles(name) VALUES ( 'admin' );
+INSERT INTO roles(name) VALUES ( 'customer' );
+
+-- Users
 INSERT INTO users (first_name, last_name, username, email, password)
 values ('John', 'Doe', 'jdoe','john.doe@example.com', 'test');
+INSERT INTO users (first_name, last_name, username, email, password)
+values ('Jane', 'Parker', 'jparker','jane.parker@example.com', 'test');
 
+-- User Roles
+INSERT INTO user_roles (USER_ID, ROLE_ID) VALUES ( 1, 1 );
+INSERT INTO user_roles (USER_ID, ROLE_ID) VALUES ( 1, 2 );
+INSERT INTO user_roles (USER_ID, ROLE_ID) VALUES ( 2, 2 );
+
+-- Garages
 INSERT INTO garages (street, floors) values ('381 main street', 4);
 INSERT INTO garages (street, floors) values ('481 main street', 5);
 INSERT INTO garages (street, floors) values ('103 third street', 3);

@@ -22,4 +22,7 @@ public class Vehicle {
     String licensePlate;
 
     String color;
+
+    @Column(name = "user_id")
+    Long userId;
 }

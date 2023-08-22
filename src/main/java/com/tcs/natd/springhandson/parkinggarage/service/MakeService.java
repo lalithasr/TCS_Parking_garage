@@ -19,10 +19,6 @@ public class MakeService {
         return this.makeRepository.findAll();
     }
 
-    public List<Make> getAllMakes() {
-        return this.makeRepository.findAll();
-    }
-
     public Make getMakeById(Long id) {
         return this.makeRepository.findById(id).orElseGet(Make::new);
     }
