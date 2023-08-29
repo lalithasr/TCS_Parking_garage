@@ -1,7 +1,10 @@
 package com.tcs.natd.springhandson.parkinggarage.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 import lombok.*;
+
+import java.util.List;
 
 @Entity
 @Table(name = "garages")
@@ -18,4 +21,8 @@ public class Garage {
     String street;
 
     int floors;
+
+/*    @OneToMany(mappedBy = "garage")
+    @JsonIgnoreProperties("garage")
+    private List<ParkingSpace> parkingSpaceList;*/
 }

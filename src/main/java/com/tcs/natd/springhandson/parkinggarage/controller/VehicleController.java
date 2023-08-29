@@ -25,6 +25,11 @@ public class VehicleController {
         return this.vehicleService.getVehicleById(id);
     }
 
+    @GetMapping("/vehicles/{make}")
+    public List<Vehicle> getVehiclesByMakeName(@PathVariable String make) {
+        return this.vehicleService.getVehiclesByMakeName(make);
+    }
+
     @PostMapping("/vehicles")
     public Vehicle addVehicle(@RequestBody Vehicle vehicle) {
         return this.vehicleService.addVehicle(vehicle);

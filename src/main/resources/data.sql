@@ -58,3 +58,11 @@ INSERT INTO user_roles (USER_ID, ROLE_ID) VALUES ( 2, 2 );
 INSERT INTO garages (street, floors) values ('381 main street', 4);
 INSERT INTO garages (street, floors) values ('481 main street', 5);
 INSERT INTO garages (street, floors) values ('103 third street', 3);
+
+-- Vehicles
+INSERT INTO vehicles (MAKE_ID, LICENSE_PLATE, COLOR, USER_ID)
+VALUES (36, 'IAMRICH', 'red', 2  );
+
+-- Parking Spaces
+INSERT INTO parking_spaces (GARAGE_ID, FLOOR, NUMBER, VEHICLE_ID)
+VALUES ( 2, 1, 33, 1 );

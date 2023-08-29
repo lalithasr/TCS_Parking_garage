@@ -18,4 +18,6 @@ public interface ParkingSpaceRepository extends JpaRepository<ParkingSpace, Long
             "ON vehicles.id = parking_spaces.vehicle_id JOIN users ON users.id = vehicles.user_id " +
             "WHERE USER_ID = ?", nativeQuery = true)
     ParkingSpace findParkingSpaceByUserId(Long userId);
+
+    ParkingSpace findParkingSpaceByFloorAndGarageIdAndNumber(int floor, Long garageId, int number);
 }

@@ -6,6 +6,7 @@ import lombok.*;
 
 import java.util.Set;
 
+
 @Entity
 @Table(name = "users")
 @Getter
@@ -30,6 +31,12 @@ public class User {
     String lastName;
     String email;
 
-    @OneToMany
-    Set<Role> roles;
+    @ManyToMany
+    @JoinTable(
+            name = "user_roles",
+            joinColumns = @JoinColumn(name = "user_id"),
+            inverseJoinColumns = @JoinColumn(name = "role_id")
+    )
+    Set<Role> roleSet;
+
 }

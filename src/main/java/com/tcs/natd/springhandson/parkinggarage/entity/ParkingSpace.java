@@ -1,5 +1,6 @@
 package com.tcs.natd.springhandson.parkinggarage.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -15,8 +16,13 @@ public class ParkingSpace {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     Long id;
 
-    @Column(name="garage_id")
-    Long garageId;
+/*    @Column(name="garage_id")
+    Long garageId;*/
+   // @JsonIgnoreProperties("")
+    @ManyToOne
+    @JoinColumn(name = "garage_id")
+    //@JsonIgnoreProperties("garage")
+    Garage garage;
 
     int floor;
 
