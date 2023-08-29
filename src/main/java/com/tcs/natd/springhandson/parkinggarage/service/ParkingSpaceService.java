@@ -66,7 +66,7 @@ public class ParkingSpaceService {
         newParkingSpace.setVehicleId(carParkingDTO.getVehicleId());
         newParkingSpace.setNumber(carParkingDTO.getNumber());
         ParkingSpace addedParkingSpace = this.parkingSpaceRepository.save(newParkingSpace);
-        carParkingDTO.setId(newParkingSpace.getId());
+        carParkingDTO.setId(addedParkingSpace.getId());
         return carParkingDTO;
     }
 

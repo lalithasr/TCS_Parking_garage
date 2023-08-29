@@ -1,6 +1,6 @@
 package com.tcs.natd.springhandson.parkinggarage.repository;
 
-import com.tcs.natd.springhandson.parkinggarage.entity.Make;
+
 import com.tcs.natd.springhandson.parkinggarage.entity.Vehicle;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;

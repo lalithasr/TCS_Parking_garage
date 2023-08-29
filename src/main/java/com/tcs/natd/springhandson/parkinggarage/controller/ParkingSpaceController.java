@@ -45,12 +45,11 @@ public class ParkingSpaceController {
             log.error(pge.getMessage());
             throw new ResponseStatusException(
                     HttpStatus.BAD_REQUEST, pge.getMessage(), pge);
-
         }
     }
 
     @PostMapping("/carParkingDTO")
-    public CarParkingDTO addCarParkingDRO(@RequestBody CarParkingDTO carParkingDTO, HttpServletResponse response) {
+    public CarParkingDTO addCarParkingDTO(@RequestBody CarParkingDTO carParkingDTO, HttpServletResponse response) {
         try {
             return this.parkingSpaceService.addParkingSpaceByCarParkingDTO(carParkingDTO);
         } catch (ParkingGarageException pge) {

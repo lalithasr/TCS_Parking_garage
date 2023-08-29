@@ -3,7 +3,6 @@ package com.tcs.natd.springhandson.parkinggarage;
 import com.tcs.natd.springhandson.parkinggarage.entity.Garage;
 import com.tcs.natd.springhandson.parkinggarage.entity.ParkingSpace;
 import com.tcs.natd.springhandson.parkinggarage.entity.Vehicle;
-import com.tcs.natd.springhandson.parkinggarage.exception.ParkingGarageException;
 import com.tcs.natd.springhandson.parkinggarage.service.ParkingSpaceService;
 import com.tcs.natd.springhandson.parkinggarage.service.VehicleService;
 import org.junit.jupiter.api.Test;
@@ -14,7 +13,6 @@ import org.springframework.test.web.servlet.MockMvc;
 
 import static org.hamcrest.Matchers.containsString;
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertThrowsExactly;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
