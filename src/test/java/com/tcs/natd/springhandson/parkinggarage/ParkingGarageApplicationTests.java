@@ -1,15 +1,20 @@
 package com.tcs.natd.springhandson.parkinggarage;
 
 import com.tcs.natd.springhandson.parkinggarage.entity.Garage;
+import com.tcs.natd.springhandson.parkinggarage.entity.Make;
 import com.tcs.natd.springhandson.parkinggarage.entity.ParkingSpace;
 import com.tcs.natd.springhandson.parkinggarage.entity.Vehicle;
+import com.tcs.natd.springhandson.parkinggarage.service.MakeService;
 import com.tcs.natd.springhandson.parkinggarage.service.ParkingSpaceService;
+import com.tcs.natd.springhandson.parkinggarage.service.UserService;
 import com.tcs.natd.springhandson.parkinggarage.service.VehicleService;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.web.servlet.MockMvc;
+
+import java.util.List;
 
 import static org.hamcrest.Matchers.containsString;
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -28,6 +33,10 @@ class ParkingGarageApplicationTests {
 	private VehicleService vehicleService;
 	@Autowired
 	private ParkingSpaceService parkingSpaceService;
+	@Autowired
+	private UserService userService;
+	@Autowired
+	private MakeService makeService;
 
 	@Test
 	void getGarageControllerLayerTest() throws Exception {
@@ -76,7 +85,20 @@ class ParkingGarageApplicationTests {
 		this.parkingSpaceService.deleteParkingSpace(addedParkingSpace);
 		this.vehicleService.deleteVehicle(addedVehicle);
 
+	}
 
+	@Test
+	void getVehiclesByUserIdTest() {
+		List<Vehicle> vehicles = this.userService.getVehiclesByUserId(2L);
+		Make myMake = this.makeService.getMakeById(vehicles.get(0).getMakeId());
+		assertEquals("ferrari", myMake.getName());
+	}
+
+	@Test
+	void getVehiclesByMakeNameTest() {
+		List<Vehicle> vehicles = this.vehicleService.getVehiclesByMakeName("ferrari");
+		Make myMake = this.makeService.getMakeById(vehicles.get(0).getMakeId());
+		assertEquals("ferrari", myMake.getName());
 	}
 
 }

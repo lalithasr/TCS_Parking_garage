@@ -45,9 +45,20 @@ public class ParkingSpaceService {
          */
         Garage myGarage = this.garageRepository.findById(parkingSpace.getGarage().getId())
                 .orElseGet(Garage::new);
+
+        // if the ID is null or 0 then we failed to find a garage.
+        if(myGarage.getId() == null || myGarage.getId() == 0L) {
+            throw new ParkingGarageException("Could not add parking space to invalid Garage.");
+        }
+
         if(parkingSpace.getFloor() > myGarage.getFloors())
             throw new ParkingGarageException("Invalid floor for Garage "+myGarage.getStreet()+
                     ". Max floor is "+myGarage.getFloors());
+
+        // Check for a valid parking space number
+        if(parkingSpace.getNumber() > 100) {
+            throw new ParkingGarageException("Invalid parking space number: " + parkingSpace.getNumber()+ ". This parking garage floor: "+myGarage.getStreet()+" - floor "+parkingSpace.getFloor()+", has only 100 spaces");
+        }
 
         ParkingSpace existingParkingSpace = this.parkingSpaceRepository.findParkingSpaceByFloorAndGarageIdAndNumber(parkingSpace.getFloor(), parkingSpace.getGarage().getId(), parkingSpace.getNumber());
         if(null != existingParkingSpace) {
