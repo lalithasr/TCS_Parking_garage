@@ -1,0 +1,28 @@
+version: 1.0
+configuration:
+  has_webserver: false
+  readonly_paths:
+    - src/test/*
+  scoring:
+    command: bash score.sh
+    files:
+      - target/surefire-reports/TEST-com.tcs.natd.springhandson.parkinggarage.ParkingGarageApplicationTests.xml
+    # Define hidden test cases and declare file paths below to evaluate candidates' submissions.
+    #
+    # Learn more:
+    # https://support.hackerrank.com/hc/en-us/articles/4761491631635-Hidden-Test-Cases-for-Front-End-Back-End-and-Full-Stack-Questions
+    #
+    # hidden_files_paths:
+    #   - tests/custom_test_[1-2].sh
+    #   - app/secret_test
+  ide_config:
+    default_open_files:
+      - src/main/java/com/tcs/natd/springbootshandson/repository/CountryRepository.java
+      - src/main/java/com/tcs/natd/springbootshandson/repository/UserRepository.java
+      - src/main/java/com/tcs/natd/springbootshandson/repository/ProductTypeRepository.java
+      - src/main/java/com/tcs/natd/springbootshandson/repository/ProductRepository.java
+      - project-documentation.md
+    project_menu:
+      run: "mvn clean spring-boot:run"
+      install: "mvn clean install"
+      test: "mvn clean test; cat target/customReports/result.txt"
