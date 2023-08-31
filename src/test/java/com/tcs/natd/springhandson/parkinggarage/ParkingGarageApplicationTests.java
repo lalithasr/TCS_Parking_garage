@@ -1,9 +1,7 @@
 package com.tcs.natd.springhandson.parkinggarage;
 
-import com.tcs.natd.springhandson.parkinggarage.entity.Garage;
-import com.tcs.natd.springhandson.parkinggarage.entity.Make;
-import com.tcs.natd.springhandson.parkinggarage.entity.ParkingSpace;
-import com.tcs.natd.springhandson.parkinggarage.entity.Vehicle;
+import com.tcs.natd.springhandson.parkinggarage.entity.*;
+import com.tcs.natd.springhandson.parkinggarage.exception.ParkingGarageException;
 import com.tcs.natd.springhandson.parkinggarage.service.MakeService;
 import com.tcs.natd.springhandson.parkinggarage.service.ParkingSpaceService;
 import com.tcs.natd.springhandson.parkinggarage.service.UserService;
@@ -18,6 +16,7 @@ import java.util.List;
 
 import static org.hamcrest.Matchers.containsString;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
@@ -74,15 +73,37 @@ class ParkingGarageApplicationTests {
 		newParkingSpace.setVehicleId(addedVehicle.getId());
 
 		ParkingSpace tempParkingSpace = this.parkingSpaceService.addParkingSpace(newParkingSpace);
-		//assertThrowsExactly(ParkingGarageException.class, this.parkingSpaceService.addParkingSpace(newParkingSpace));
-		//assertT
-		//assertEx
 
 		ParkingSpace addedParkingSpace = this.parkingSpaceService.getParkingSpaceById(tempParkingSpace.getId());
 
 		assertEquals(addedParkingSpace.getVehicleId(), addedVehicle.getId());
 
 		this.parkingSpaceService.deleteParkingSpace(addedParkingSpace);
+		this.vehicleService.deleteVehicle(addedVehicle);
+
+	}
+
+	@Test
+	void addInvalidParkingSpaceServiceLayerTest() throws Exception {
+		ParkingSpace newParkingSpace = new ParkingSpace();
+		Garage newGarage = new Garage();
+		newGarage.setId(1L);
+		newParkingSpace.setGarage(newGarage);
+		newParkingSpace.setFloor(4);
+		newParkingSpace.setNumber(101);
+
+		Vehicle myVehicle = new Vehicle();
+		myVehicle.setColor("blue");
+		myVehicle.setLicensePlate("OBG 1234");
+		myVehicle.setMakeId(1L);
+		myVehicle.setUserId(2L);
+
+		Vehicle addedVehicle = this.vehicleService.addVehicle(myVehicle);
+
+		newParkingSpace.setVehicleId(addedVehicle.getId());
+
+		assertThrows(ParkingGarageException.class, () -> {this.parkingSpaceService.addParkingSpace(newParkingSpace); });
+
 		this.vehicleService.deleteVehicle(addedVehicle);
 
 	}
@@ -101,4 +122,29 @@ class ParkingGarageApplicationTests {
 		assertEquals("ferrari", myMake.getName());
 	}
 
+	@Test
+	void getParkingSpaceByVehicleIdTest() {
+		ParkingSpace parkingSpace = this.parkingSpaceService.getParkingSpaceByVehicleId(1L);
+		Vehicle myVehicle = this.vehicleService.getVehicleById(parkingSpace.getVehicleId());
+
+		assertEquals("IAMRICH", myVehicle.getLicensePlate());
+	}
+
+	@Test
+	void findAllParkingSpacesByGarageIdTest() {
+		List<ParkingSpace> parkingSpaceList = this.parkingSpaceService.findAllParkingSpacesByGarageId(2L);
+		assertEquals(1, parkingSpaceList.size());
+	}
+
+	@Test
+	void getParkingSpaceByUserIdTest() {
+		ParkingSpace parkingSpace = this.userService.getParkingSpaceByUserId(2L);
+		assertEquals(33, parkingSpace.getNumber());
+	}
+
+	@Test
+	void getUsernameByEmailTest() {
+		User user = this.userService.getUserByEmail("jane.parker@example.com");
+		assertEquals("Jane", user.getFirstName());
+	}
 }
