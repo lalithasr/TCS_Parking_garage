@@ -26,44 +26,22 @@ public class UserService {
         this.userRoleRepository = userRoleRepository;
     }
 
-    public List<User> getAllUsers() {
-        return this.usersRepository.findAll();
-    }
+    //public List<User> getAllUsers() {
 
-    public User getUserById(Long id) {
-        return this.usersRepository.findById(id).orElseGet(User::new);
-    }
+    //public User getUserById(Long id) {
 
-    public User getUserByUsername(String username) {
-        return this.usersRepository.getUserByUsername(username);
-    }
+    //public User getUserByUsername(String username) {
 
-    public User getUserByEmail(String email) {
-        return this.usersRepository.getUserByEmail(email);
-    }
+    //public User getUserByEmail(String email) {
 
-    public List<Vehicle> getVehiclesByUserId(Long userId) {
-        return this.vehicleRepository.findAllByUserId(userId);
-    }
 
-    public ParkingSpace getParkingSpaceByUserId(Long userId) {
-        return this.parkingSpaceRepository.findParkingSpaceByUserId(userId);
-    }
+    //public List<Vehicle> getVehiclesByUserId(Long userId) {
 
-    public User addUser(User user) {
-        User newUser = this.usersRepository.save(user);
+    //public ParkingSpace getParkingSpaceByUserId(Long userId) {
 
-        UserRole userRole = new UserRole();
+    //public User addUser(User user) {
 
-        // All users will at least have the role of customer (id 2)
-        userRole.setRoleId(2L);
-        userRole.setUserId(newUser.getId());
-        this.userRoleRepository.save(userRole);
 
-        return newUser;
-    }
+    //public void deleteUser(User user) {
 
-    public void deleteUser(User user) {
-        this.usersRepository.delete(user);
-    }
 }

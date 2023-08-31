@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@RestController
+
 public class VehicleController {
 
     private final VehicleService vehicleService;
@@ -15,28 +15,14 @@ public class VehicleController {
         this.vehicleService = vehicleService;
     }
 
-    @GetMapping("/vehicles")
-    public List<Vehicle> getAllVehicles() {
-        return this.vehicleService.getAllVehicles();
-    }
+    //@GetMapping("/vehicles")
 
-    @GetMapping("/vehicles/{id}")
-    public Vehicle getVehicleById(@PathVariable Long id) {
-        return this.vehicleService.getVehicleById(id);
-    }
+    //@GetMapping("/vehicles/{id}")
 
-    @GetMapping("/vehicles/{make}")
-    public List<Vehicle> getVehiclesByMakeName(@PathVariable String make) {
-        return this.vehicleService.getVehiclesByMakeName(make);
-    }
+    //@GetMapping("/vehicles/{make}")
 
-    @PostMapping("/vehicles")
-    public Vehicle addVehicle(@RequestBody Vehicle vehicle) {
-        return this.vehicleService.addVehicle(vehicle);
-    }
+    //@PostMapping("/vehicles")
 
-    @DeleteMapping("/vehicles")
-    public void deleteVehicle(@RequestBody Vehicle vehicle) {
-        this.vehicleService.deleteVehicle(vehicle);
-    }
+    //@DeleteMapping("/vehicles")
+
 }

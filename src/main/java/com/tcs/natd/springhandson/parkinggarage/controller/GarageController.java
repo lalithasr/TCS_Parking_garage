@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@RestController
+
 public class GarageController {
     private final GarageService garageService;
     private final ParkingSpaceService parkingSpaceService;
@@ -18,25 +18,15 @@ public class GarageController {
         this.parkingSpaceService = parkingSpaceService;
     }
 
-    @GetMapping("/garages")
-    public List<Garage> findAllGarages() {
-        return this.garageService.getAllGarages();
-    }
+   // @GetMapping("/garages")
 
-    @GetMapping("/garages/{id}")
-    public Garage getGarageById(@PathVariable Long id) {
-        return this.garageService.getGarageById(id);
-    }
+
+    //@GetMapping("/garages/{id}")
+
 
     // This method returns all occupied parking spaces
-    @GetMapping("/garages/{id}/parkingspaces")
-    public List<ParkingSpace> getParkingSpaceByGarageId(@PathVariable Long id) {
-        return this.parkingSpaceService.findAllParkingSpacesByGarageId(id);
-    }
+    //@GetMapping("/garages/{id}/parkingspaces")
 
-    @PostMapping("/garages")
-    public Garage addGarage(@RequestBody Garage garage) {
-        return this.garageService.addGarage(garage);
-    }
+    //@PostMapping("/garages")
 
 }

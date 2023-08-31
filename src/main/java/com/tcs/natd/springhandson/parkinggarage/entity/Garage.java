@@ -29,7 +29,5 @@ public class Garage {
     @JsonIgnoreProperties("garage")
     private List<ParkingSpace> parkingSpaceList;
 
-/*    @OneToMany(mappedBy = "garage")
-    @JsonIgnoreProperties("garage")
-    private List<ParkingSpace> parkingSpaceList;*/
+
 }

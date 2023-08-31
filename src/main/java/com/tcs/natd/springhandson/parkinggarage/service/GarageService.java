@@ -14,20 +14,12 @@ public class GarageService {
         this.garageRepository = garageRepository;
     }
 
-    public List<Garage> getAllGarages() {
-        return this.garageRepository.findAll();
-    }
+    //public List<Garage> getAllGarages()
 
-    public Garage getGarageById(Long id) {
-        return this.garageRepository.findById(id).orElseGet(Garage::new);
-    }
+    //public Garage getGarageById(Long id) {
 
-    public Garage addGarage(Garage garage) {
+    //public Garage addGarage(Garage garage) {
 
-        return this.garageRepository.save(garage);
-    }
+    //public void deleteGarage(Garage garage) {
 
-    public void deleteGarage(Garage garage) {
-        this.garageRepository.delete(garage);
-    }
 }

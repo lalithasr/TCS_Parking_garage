@@ -12,8 +12,7 @@ import java.util.List;
 
 import org.springframework.web.server.ResponseStatusException;
 
-@RestController
-@Slf4j
+
 public class ParkingSpaceController {
     //Logger logger = LogManager.getLogger(ParkingSpaceController.class);
     private final ParkingSpaceService parkingSpaceService;
@@ -22,49 +21,23 @@ public class ParkingSpaceController {
         this.parkingSpaceService = parkingSpaceService;
     }
 
-    @GetMapping("/parkingspaces")
-    public List<ParkingSpace> getAllParkingSpaces() {
-        return this.parkingSpaceService.getAllParkingSpaces();
-    }
+    //@GetMapping("/parkingspaces")
 
-    @GetMapping("/parkingspaces/{id}")
-    public ParkingSpace getParkingSpaceById(@PathVariable Long id) {
-        return this.parkingSpaceService.getParkingSpaceById(id);
-    }
 
-    @GetMapping("/parkingspaces/vehicles/{id}")
-    public ParkingSpace getParkingSpaceByVehicleId(@PathVariable Long id) {
-        return this.parkingSpaceService.getParkingSpaceByVehicleId(id);
-    }
+    //@GetMapping("/parkingspaces/{id}")
 
-    @PostMapping("/parkingspaces")
-    public ParkingSpace addParkingSpace(@RequestBody ParkingSpace parkingSpace, HttpServletResponse response) {
-        try {
-            return this.parkingSpaceService.addParkingSpace(parkingSpace);
-        } catch (ParkingGarageException pge) {
-            log.error(pge.getMessage());
-            throw new ResponseStatusException(
-                    HttpStatus.BAD_REQUEST, pge.getMessage(), pge);
-        }
-    }
 
-    @PostMapping("/carParkingDTO")
-    public CarParkingDTO addCarParkingDTO(@RequestBody CarParkingDTO carParkingDTO, HttpServletResponse response) {
-        try {
-            return this.parkingSpaceService.addParkingSpaceByCarParkingDTO(carParkingDTO);
-        } catch (ParkingGarageException pge) {
-            log.error(pge.getMessage());
-            throw new ResponseStatusException(
-                    HttpStatus.BAD_REQUEST, pge.getMessage(), pge);
-        }
-    }
+    //@GetMapping("/parkingspaces/vehicles/{id}")
+
+
+    //@PostMapping("/parkingspaces")
+
+
+    //@PostMapping("/carParkingDTO")
+
 
 
     // Used when a customer leaves the garage and pays for their stay.
-    @DeleteMapping("/parkingspaces/{id}")
-    public void deleteParkingSpace(@PathVariable Long id) {
-        ParkingSpace pSpace = new ParkingSpace();
-        pSpace.setId(id);
-        this.parkingSpaceService.deleteParkingSpace(pSpace);
-    }
+    //@DeleteMapping("/parkingspaces/{id}")
+
 }

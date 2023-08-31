@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@RestController
+
 public class UserController {
     private final UserService userService;
 
@@ -17,47 +17,28 @@ public class UserController {
         this.userService = userService;
     }
 
-    @GetMapping("/users")
-    public List<User> getAllUsers() {
-        return this.userService.getAllUsers();
-    }
+    //@GetMapping("/users")
+
+    //@GetMapping("/users/{id}")
 
 
-    @GetMapping("/users/{id}")
-    public User getUserById(@PathVariable Long id) {
-        return this.userService.getUserById(id);
-    }
-
-    @GetMapping("users/{id}/vehicles")
-    public List<Vehicle> getVehiclesByUserId(@PathVariable Long id) {
-        return this.userService.getVehiclesByUserId(id);
-    }
-
-    @GetMapping("/users/{id}/parkingspaces")
-    public ParkingSpace getParkingSpacesByUserId(@PathVariable Long id) {
-        return this.userService.getParkingSpaceByUserId(id);
-    }
-
-    @GetMapping("/users/email/{email}")
-    public User getUserByEmail(@PathVariable String email) {
-        return this.userService.getUserByEmail(email);
-    }
+    //@GetMapping("users/{id}/vehicles")
 
 
-    @GetMapping("/users/username/{username}")
-    public User getUserByUsername(@PathVariable String username) {
-        return this.userService.getUserByUsername(username);
-    }
+    //@GetMapping("/users/{id}/parkingspaces")
 
 
-    @PostMapping("/users")
-    public User addUser(@RequestBody User user) {
-        return this.userService.addUser(user);
-    }
+    //@GetMapping("/users/email/{email}")
 
 
-    @DeleteMapping("/users")
-    public void deleteUser(@RequestBody User user) {
-        this.userService.deleteUser(user);
-    }
+
+    //@GetMapping("/users/username/{username}")
+
+
+
+    //@PostMapping("/users")
+
+
+    //@DeleteMapping("/users")
+
 }

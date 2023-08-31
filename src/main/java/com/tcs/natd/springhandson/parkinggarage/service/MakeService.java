@@ -15,21 +15,13 @@ public class MakeService {
         this.makeRepository = makeRepository;
     }
 
-    public List<Make> findAllMakes() {
-        return this.makeRepository.findAll();
-    }
+   // public List<Make> findAllMakes() {
 
-    public Make getMakeById(Long id) {
-        return this.makeRepository.findById(id).orElseGet(Make::new);
-    }
+    //public Make getMakeById(Long id) {
 
-    public Make addMake(Make make) {
-        return this.makeRepository.save(make);
-    }
+    //public Make addMake(Make make) {
 
-    public void deleteMake(Make make) {
-        this.makeRepository.delete(make);
-    }
+    //public void deleteMake(Make make) {
 
 
 }

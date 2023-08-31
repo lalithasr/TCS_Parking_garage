@@ -14,23 +14,17 @@ public class VehicleService {
         this.vehicleRepository = vehicleRepository;
     }
 
-    public List<Vehicle> getAllVehicles() {
-        return this.vehicleRepository.findAll();
-    }
+   // public List<Vehicle> getAllVehicles() {
 
-    public Vehicle getVehicleById(Long id) {
-        return this.vehicleRepository.findById(id).orElseGet(Vehicle::new);
-    }
+    //public Vehicle getVehicleById(Long id) {
 
-    public List<Vehicle> getVehiclesByMakeName(String makeName) {
-        return this.vehicleRepository.findAllByMakeName(makeName);
-    }
 
-    public Vehicle addVehicle(Vehicle vehicle) {
-        return this.vehicleRepository.save(vehicle);
-    }
+    //public List<Vehicle> getVehiclesByMakeName(String makeName) {
 
-    public void deleteVehicle(Vehicle vehicle) {
-        this.vehicleRepository.delete(vehicle);
-    }
+
+    //public Vehicle addVehicle(Vehicle vehicle) {
+
+
+    //public void deleteVehicle(Vehicle vehicle) {
+
 }

@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@RestController
+
 public class MakeController {
 
     private final MakeService makeService;
@@ -15,25 +15,16 @@ public class MakeController {
         this.makeService = makeService;
     }
 
-    @GetMapping("/makes")
-    public List<Make> getAllMakes() {
-        return this.makeService.findAllMakes();
-    }
+    //@GetMapping("/makes")
 
-    @GetMapping("/makes/{id}")
-    public Make getMakeById(@PathVariable Long id) {
-        return this.makeService.getMakeById(id);
-    }
 
-    @PostMapping("/makes")
-    public Make addMake(@RequestBody Make make){
-        return this.makeService.addMake(make);
-    }
+    //@GetMapping("/makes/{id}")
 
-    @DeleteMapping("makes/{id}")
-    public void deleteMake(@PathVariable Long id) {
-        Make myMake = new Make();
-        myMake.setId(id);
-        this.makeService.deleteMake(myMake);
-    }
+
+    //@PostMapping("/makes")
+
+
+    //@DeleteMapping("makes/{id}")
+
+
 }
