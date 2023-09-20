@@ -81,6 +81,7 @@ class ParkingGarageApplicationTests {
 		this.parkingSpaceService.deleteParkingSpace(addedParkingSpace);
 		this.vehicleService.deleteVehicle(addedVehicle);
 
+
 	}
 
 	@Test
