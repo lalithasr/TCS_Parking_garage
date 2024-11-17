@@ -15,13 +15,13 @@ public class ParkingSpace {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     Long id;
 
-/*    @Column(name="garage_id")
-    Long garageId;*/
-   // @JsonIgnoreProperties("")
-    @ManyToOne
-    @JoinColumn(name = "garage_id")
-    //@JsonIgnoreProperties("garage")
-    Garage garage;
+    @Column(name="garage_id")
+    Long garageId;
+//   // @JsonIgnoreProperties("")
+//    @ManyToOne
+//    @JoinColumn(name = "garage_id")
+//    //@JsonIgnoreProperties("garage")
+//    Garage garage;
 
     int floor;
 

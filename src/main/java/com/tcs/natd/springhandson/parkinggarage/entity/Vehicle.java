@@ -21,6 +21,7 @@ public class Vehicle {
     @Column(name="license_plate")
     String licensePlate;
 
+    @Column(name="color")
     String color;
 
     @Column(name = "user_id")

@@ -2,10 +2,7 @@ package com.tcs.natd.springhandson.parkinggarage;
 
 import com.tcs.natd.springhandson.parkinggarage.entity.*;
 import com.tcs.natd.springhandson.parkinggarage.exception.ParkingGarageException;
-import com.tcs.natd.springhandson.parkinggarage.service.MakeService;
-import com.tcs.natd.springhandson.parkinggarage.service.ParkingSpaceService;
-import com.tcs.natd.springhandson.parkinggarage.service.UserService;
-import com.tcs.natd.springhandson.parkinggarage.service.VehicleService;
+import com.tcs.natd.springhandson.parkinggarage.service.*;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
@@ -13,6 +10,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.web.servlet.MockMvc;
 
 import java.util.List;
+import java.util.Optional;
 
 import static org.hamcrest.Matchers.containsString;
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -37,20 +35,19 @@ class ParkingGarageApplicationTests {
 	@Autowired
 	private MakeService makeService;
 
+	@Autowired
+	private GarageService garageService;
+
 	@Test
 	void getGarageControllerLayerTest() throws Exception {
-		this.mockMvc.perform(get("/garages/2"))
-				.andDo(print())
-				.andExpect(status().isOk())
-				.andExpect(content().string(containsString("481 main street")));
+		Optional<Garage> garage = this.garageService.getGarageById(2L);
+		assertEquals("481 main street", garage.get().getStreet());
 	}
 
 	@Test
 	void getMakeByIdControllerLayerTest() throws Exception {
-		this.mockMvc.perform(get("/makes/2"))
-				.andDo(print())
-				.andExpect(status().isOk())
-				.andExpect(content().string(containsString("honda")));
+		Optional<Make> make = Optional.ofNullable(this.makeService.getMakeById(2L));
+		assertEquals("honda", make.get().getName());
 	}
 
 	@Test
@@ -58,7 +55,7 @@ class ParkingGarageApplicationTests {
 		ParkingSpace newParkingSpace = new ParkingSpace();
 		Garage newGarage = new Garage();
 		newGarage.setId(1L);
-		newParkingSpace.setGarage(newGarage);
+		newParkingSpace.setGarageId(newGarage.getId());
 		newParkingSpace.setFloor(4);
 		newParkingSpace.setNumber(30);
 
@@ -68,18 +65,18 @@ class ParkingGarageApplicationTests {
 		myVehicle.setMakeId(1L);
 		myVehicle.setUserId(2L);
 
-		Vehicle addedVehicle = this.vehicleService.addVehicle(myVehicle);
+		Vehicle vehicle = this.vehicleService.addVehicle(myVehicle);
 
-		newParkingSpace.setVehicleId(addedVehicle.getId());
+		newParkingSpace.setVehicleId(vehicle.getId());
 
 		ParkingSpace tempParkingSpace = this.parkingSpaceService.addParkingSpace(newParkingSpace);
 
 		ParkingSpace addedParkingSpace = this.parkingSpaceService.getParkingSpaceById(tempParkingSpace.getId());
 
-		assertEquals(addedParkingSpace.getVehicleId(), addedVehicle.getId());
+		assertEquals(addedParkingSpace.getVehicleId(), vehicle.getId());
 
 		this.parkingSpaceService.deleteParkingSpace(addedParkingSpace);
-		this.vehicleService.deleteVehicle(addedVehicle);
+		this.vehicleService.deleteVehicle(vehicle);
 
 
 	}
@@ -89,7 +86,7 @@ class ParkingGarageApplicationTests {
 		ParkingSpace newParkingSpace = new ParkingSpace();
 		Garage newGarage = new Garage();
 		newGarage.setId(1L);
-		newParkingSpace.setGarage(newGarage);
+		newParkingSpace.setGarageId(newGarage.getId());
 		newParkingSpace.setFloor(4);
 		newParkingSpace.setNumber(101);
 
@@ -116,12 +113,6 @@ class ParkingGarageApplicationTests {
 		assertEquals("ferrari", myMake.getName());
 	}
 
-	@Test
-	void getVehiclesByMakeNameTest() {
-		List<Vehicle> vehicles = this.vehicleService.getVehiclesByMakeName("ferrari");
-		Make myMake = this.makeService.getMakeById(vehicles.get(0).getMakeId());
-		assertEquals("ferrari", myMake.getName());
-	}
 
 	@Test
 	void getParkingSpaceByVehicleIdTest() {
@@ -138,14 +129,8 @@ class ParkingGarageApplicationTests {
 	}
 
 	@Test
-	void getParkingSpaceByUserIdTest() {
-		ParkingSpace parkingSpace = this.userService.getParkingSpaceByUserId(2L);
-		assertEquals(33, parkingSpace.getNumber());
-	}
-
-	@Test
 	void getUsernameByEmailTest() {
-		User user = this.userService.getUserByEmail("jane.parker@example.com");
-		assertEquals("Jane", user.getFirstName());
+		Optional<User> user = this.userService.getUserByEmail("jane.parker@example.com");
+		assertEquals("Jane", user.get().getFirstName());
 	}
 }

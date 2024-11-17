@@ -7,9 +7,9 @@ import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
-
-public interface ParkingSpaceRepository  {
-    ParkingSpace findByVehicleId(Long id);
+@Repository
+public interface ParkingSpaceRepository extends JpaRepository<ParkingSpace, Long> {
+    List<ParkingSpace> findByVehicleId(Long id);
 
     List<ParkingSpace> findAllByGarageId(Long garageId);
 
@@ -17,7 +17,15 @@ public interface ParkingSpaceRepository  {
             "parking_spaces.number, parking_spaces.vehicle_id FROM parking_Spaces JOIN vehicles " +
             "ON vehicles.id = parking_spaces.vehicle_id JOIN users ON users.id = vehicles.user_id " +
             "WHERE USER_ID = ?", nativeQuery = true)
-    ParkingSpace findParkingSpaceByUserId(Long userId);
+    ParkingSpace findParkingSpaceById(Long userId);
 
     ParkingSpace findParkingSpaceByFloorAndGarageIdAndNumber(int floor, Long garageId, int number);
+
+    ParkingSpace getParkingSpaceById(long l);
+
+    ParkingSpace getParkingSpaceByVehicleId(long l);
+
+    List<ParkingSpace> findAllParkingSpacesByGarageId(long l);
+
+
 }
